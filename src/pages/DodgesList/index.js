@@ -31,9 +31,14 @@ const DodgesList = () => {
 
   return (
     <div className="h-screen flex flex-col items-center">
-      <h1 className="mt-20 mb-10 text-4xl">Lista de dodges</h1>
+      <div className="flex flex-row gap-2 items-center self-start mt-5 ml-5">
+        <img alt="logo" src="/logo192.png" className="w-8 rounded-full border-2 border-black shadow-md"/>
+        <p>por duucky</p>
+      </div>
 
-      <div className="flex flex-row gap-2">
+      <h1 className="mt-5 mb-10 text-4xl">Dodges mais recentes</h1>
+
+      <div className="flex flex-row gap-2 mb-10">
         <button
           className={clsx("px-3 py-1", queueType === 'SOLO' ? 'bg-neutral-800' : 'border-neutral-800 border-2')}
           onClick={() => setQueueType('SOLO')}
@@ -48,13 +53,14 @@ const DodgesList = () => {
         </button>
       </div>
       
-      <table className="table-auto w-1/3">
+      <table className="table-fixed w-2/4">
         <tbody>
           {currentQueueDodges.map((dodge) => (
             <tr key={dodge.id}>
-              <td>{dodge.gameName}#{dodge.tagLine}</td>
-              <td>{dodge.rank}</td>
-              <td>- {dodge.lpLost} PDL</td>
+              <td className="py-1">{dodge.gameName}#{dodge.tagLine}</td>
+              <td className="w-28">{dodge.lp} PDL</td>
+              <td className="w-36">{dodge.rank}</td>
+              <td className="w-20 text-red-500">{dodge.lpLost} PDL</td>
               <td className="w-40">{new Date(dodge.time).toLocaleDateString("pt-BR", { hour: 'numeric', minute: 'numeric', second: 'numeric' })}</td>
             </tr>
           ))}
