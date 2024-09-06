@@ -5,7 +5,7 @@ import useWebSocket from 'react-use-websocket';
 const DodgesList = () => {
   const [queueType, setQueueType] = useState('SOLO')
   const [dodges, setDodges] = useState([]);
-  const { lastMessage } = useWebSocket(process.env.REACT_APP_WS_URL);
+  const { lastMessage } = useWebSocket(process.env.REACT_APP_WS_URL, { shouldReconnect: () => true });
 
   useEffect(() => {
     const fetchData = async () => {
