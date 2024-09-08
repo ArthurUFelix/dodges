@@ -11,7 +11,7 @@ const DodgesList = () => {
   useEffect(() => {
     ReactGA.send({
       hitType: "pageview",
-      page: "/dodges",
+      page: "/",
       title: "Dodges",
     });
   
