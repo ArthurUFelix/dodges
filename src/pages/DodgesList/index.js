@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import { useEffect, useMemo, useState } from 'react';
 import useWebSocket from 'react-use-websocket';
-import ReactGA from 'react-ga4';
 
 const DodgesList = () => {
   const [queueType, setQueueType] = useState('SOLO')
@@ -9,12 +8,6 @@ const DodgesList = () => {
   const { lastMessage } = useWebSocket(process.env.REACT_APP_WS_URL, { shouldReconnect: () => true });
 
   useEffect(() => {
-    ReactGA.send({
-      hitType: "pageview",
-      page: "/",
-      title: "Dodges",
-    });
-  
     const fetchData = async () => {
       try {
         const data = await fetch(`${process.env.REACT_APP_API_URL}/dodges`).then(res => res.json())
