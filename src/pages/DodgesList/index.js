@@ -1,13 +1,18 @@
 import clsx from 'clsx';
 import { useEffect, useMemo, useState } from 'react';
 import useWebSocket from 'react-use-websocket';
+import ReactGA from 'react-ga';
 
 const DodgesList = () => {
+  ReactGA.initialize('UA-167XXXXXX-X');
   const [queueType, setQueueType] = useState('SOLO')
   const [dodges, setDodges] = useState([]);
   const { lastMessage } = useWebSocket(process.env.REACT_APP_WS_URL, { shouldReconnect: () => true });
 
   useEffect(() => {
+    ReactGA.initialize(process.env.REACT_APP_GA_ID);
+    ReactGA.pageview(window.location.pathname + window.location.search);
+
     const fetchData = async () => {
       try {
         const data = await fetch(`${process.env.REACT_APP_API_URL}/dodges`).then(res => res.json())
