@@ -11,7 +11,7 @@ const DodgesList = () => {
 
   useEffect(() => {
     ReactGA.initialize(process.env.REACT_APP_GA_ID);
-    ReactGA.pageview(window.location.pathname + window.location.search);
+    ReactGA.send({ hitType: "pageview", page: "/dodges", title: "Dodges" });
 
     const fetchData = async () => {
       try {
