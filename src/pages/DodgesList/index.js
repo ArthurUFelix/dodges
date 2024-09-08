@@ -7,10 +7,14 @@ const DodgesList = () => {
   const [queueType, setQueueType] = useState('SOLO')
   const [dodges, setDodges] = useState([]);
   const { lastMessage } = useWebSocket(process.env.REACT_APP_WS_URL, { shouldReconnect: () => true });
-  ReactGA.initialize(process.env.REACT_APP_GA_ID);
-  ReactGA.send({ hitType: "pageview", page: "/dodges", title: "Dodges" });
 
   useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: "/dodges",
+      title: "Dodges",
+    });
+  
     const fetchData = async () => {
       try {
         const data = await fetch(`${process.env.REACT_APP_API_URL}/dodges`).then(res => res.json())
