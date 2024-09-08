@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useEffect, useMemo, useState } from 'react';
 import useWebSocket from 'react-use-websocket';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 
 const DodgesList = () => {
   ReactGA.initialize('UA-167XXXXXX-X');
