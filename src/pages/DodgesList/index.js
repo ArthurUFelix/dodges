@@ -51,13 +51,13 @@ const DodgesList = () => {
           <tbody>
             <tr>
               <td>SOLO</td>
-              <td className="text-right">{lpCut.solo?.grandmaster || "-"}</td>
-              <td className="text-right">{lpCut.solo?.challenger || "-"}</td>
+              <td className="text-center">{lpCut.solo?.grandmaster || "-"}</td>
+              <td className="text-center">{lpCut.solo?.challenger || "-"}</td>
             </tr>
             <tr>
               <td>FLEX</td>
-              <td className="text-right">{lpCut.flex?.grandmaster || "-"}</td>
-              <td className="text-right">{lpCut.flex?.challenger || "-"}</td>
+              <td className="text-center">{lpCut.flex?.grandmaster || "-"}</td>
+              <td className="text-center">{lpCut.flex?.challenger || "-"}</td>
             </tr>
           </tbody>
         </table>
