@@ -5,13 +5,17 @@ import useWebSocket from 'react-use-websocket';
 const DodgesList = () => {
   const [queueType, setQueueType] = useState('SOLO')
   const [dodges, setDodges] = useState([]);
+  const [lpCut, setLpCut] = useState({});
   const { lastMessage } = useWebSocket(process.env.REACT_APP_WS_URL, { shouldReconnect: () => true });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetch(`${process.env.REACT_APP_API_URL}/dodges`).then(res => res.json())
-        setDodges(data)
+        const dodgesData = await fetch(`${process.env.REACT_APP_API_URL}/dodges`).then(res => res.json())
+        setDodges(dodgesData)
+
+        const cutData = await fetch(`${process.env.REACT_APP_API_URL}/cut`).then(res => res.json())
+        setLpCut(cutData)
       } catch (err) {
         console.log('api not available')
       }
@@ -31,9 +35,32 @@ const DodgesList = () => {
 
   return (
     <div className="h-screen flex flex-col items-center">
-      <div className="flex flex-row gap-2 items-center self-start mt-5 ml-5">
-        <img alt="logo" src="/logo192.png" className="w-8 rounded-full border-2 border-black shadow-md"/>
-        <p>por duucky</p>
+      <div className="flex flex-row justify-between items-center self-start mt-5 px-5 w-full">
+        <div className="flex flex-row gap-2">
+          <img alt="logo" src="/logo192.png" className="w-8 rounded-full border-2 border-black shadow-md"/>
+          <p>por duucky</p>
+        </div>
+
+        <table>
+          <thead>
+            <th/>
+            <th className="w-20">GM</th>
+            <th className="w-20">CHALL</th>
+            <th/>
+          </thead>
+          <tbody>
+            <tr>
+              <td>SOLO</td>
+              <td className="text-right">{lpCut.SOLO?.grandmaster || "-"}</td>
+              <td className="text-right">{lpCut.SOLO?.challenger || "-"}</td>
+            </tr>
+            <tr>
+              <td>FLEX</td>
+              <td className="text-right">{lpCut.FLEX?.grandmaster || "-"}</td>
+              <td className="text-right">{lpCut.FLEX?.challenger || "-"}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <h1 className="mt-5 mb-10 text-4xl">Dodges mais recentes</h1>
